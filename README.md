@@ -14,8 +14,9 @@ At the moment the application is structured as a single huge function.
 2. Next think about how you can structure the app into three modules (as separate JavaScript files):
     * *simpleMath.js* - should contain a single function *doubleIt()*
     * *validateUserInput* - should contain a single function *isANumber()*
-    * *doubleItApp* - should contain the other functions. It should co-ordinate activity between the other modules and run the app. 
-    * Modify the HTML page to load the files in the order above. 
+    * *doubleItApp* - should contain the remaining functions. It should co-ordinate activity between the other modules and run the app. 
+    * Modify the HTML page to load all the files . 
+    * Test the app still works.
 
 3. Now think about how you can use ES2015 *import* and *export* statements to handle your module loading. 
     * This will only work if the files are on a web server e.g. *http-server*. make sure you have a web server up and running. 
@@ -28,76 +29,32 @@ At the moment the application is structured as a single huge function.
 4. 
 
 Have a go using webpack. Here are some instructions to get you going:
-
-* First we need to create a Node.js project.
-* Open the Node.js Command Prompt
-* Navigate to your folder of practical work
-```
-* Enter the following to create a Node.js project
+* Enter the following to make the practical folder a Node.js project
 ```
 npm init-y
 ```
 * Enter the following to install webpack
 ```
-npm install --save-dev webpack
+npm install webpack webpack-cli --save-dev
 ```
-* Now try and create a number of modules. Try creating two modules *simpleMath.js* and *validateUserInput.js*. 
-* Use export to specify which parts of the module should be accessible. here's an example for *simpleMath.js*.
+* We can use webpack to resolve the dependencies and generate a single js file for us. There are a number of ways we can do this. One approach is to use a configuration file. Create the following file and save it as *webpack.config.js* in the root of your practical work folder. 
 ```
-var simpleMath={
-    doubleIt:function(num){
-        return num*2;
-    }
-}
-export {simpleMath}
+const path = require('path');
 
-```
-
-* Use app.js to import these modules and use them. 
-
-```
-import {simpleMath} from './simpleMath.js'
-import {validateUserInput} from './validateUserInput.js'
-var app={
-    userNumBox:document.querySelector("#userNum"),
-    btn:document.querySelector("#goBtn"),
-    msgDiv:document.querySelector("#msg"),
-    clickHandler:function(evnt){
-        doCalc();
-    },
-    displayFeedback:function(msg){
-        this.msgDiv.innerHTML=msg;
-    },
-    doCalc:function()
-    {
-        var userNum = this.userNumBox.value;
-        if(validateUserInput.isANumber(userNum))
-        {
-            var doubleNum=simpleMath.doubleIt(userNum);
-            this.displayFeedback("Double "+userNum+" is "+doubleNum)
-        }else{
-            this.displayFeedback("You need to enter a number")
-            this.userNumBox.value="";
-            this.userNumBox.focus();
-        }
-    },
-    handleClick:function(){
-        app.doCalc();
-    },
-    init:function(){
-        this.btn.addEventListener("click",app.handleClick,false);
-    }
-}
-
-app.init();
-
+module.exports = {
+  entry: './js/app.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, './js')
+  }
+};
 ```
 
-* Finally we can use webpack to resolve the dependencies and generate a single js file for us. In the Command Prompt enter the following:
+* In the Command Prompt enter the following:
 
 ```
-node_modules\.bin\webpack js\app.js js\bundle.js
+npx webpack --config webpack.config.js
 ```
-
-* Change the *src* attribute in the ```<script>``` element in your HTML page to point at bundle.js.
+* Have a look at *main.js* the file that webpack has generated for us. 
+* Now you should only need a single *script* element in you HTML page that points to *main.js*.
 * Test the application still works. 
