@@ -11,21 +11,27 @@ At the moment the application is structured as a single huge function.
     * *doCalc()*. Should co-ordinate activity between the other functions and run the app.
     * *clickHandler()*. Should be the event handler for the button click. It should simply call *doCalc()*.
 
-2. Change the app so that the user can hit enter instead of clicking on the 'GO' button to run the app. You should find this is easy to do as we have separated out the event handling code.  
+2. Next think about how you can structure the app into three modules (as separate JavaScript files):
+    * *simpleMath.js* - should contain a single function *doubleIt()*
+    * *validateUserInput* - should contain a single function *isANumber()*
+    * *doubleItApp* - should contain the other functions. It should co-ordinate activity between the other modules and run the app. 
+    * Modify the HTML page to load the files in the order above. 
 
-2. Next think about how you can you use the object literal pattern to structure the app into three modules:
-    * *simpleMath* - contains the single function *doubleIt()*
-    * *validateUserInput* - contains the single function *isANumber()*
-    * *doubleItApp* - Contains the other functions. It should co-ordinate activity between the other modules and run the app. 
+3. Now think about how you can use ES2015 *import* and *export* statements to handle your module loading. 
+    * This will only work if the files are on a web server e.g. *http-server*. make sure you have a web server up and running. 
+    * Change the *script* elements to specify that you want to use modules e.g. 
+    ```html
+    <script type="module" src="js/simpleMath.js"></script>
+    ```
+    * Use the *import* and *export* statements to load specifc functions from your modules. See https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export#Using_named_exports for an example. 
 
-3. Now think about how you can use ES2015 *import* and *export* statements to handle your module loading. Have a go using webpack. Here are some instructions to get you going:
+4. 
+
+Have a go using webpack. Here are some instructions to get you going:
 
 * First we need to create a Node.js project.
 * Open the Node.js Command Prompt
 * Navigate to your folder of practical work
-* You may need to set the proxy e.g
-```
-npm config set proxy http://wwwproxy.hud.ac.uk:3128
 ```
 * Enter the following to create a Node.js project
 ```
