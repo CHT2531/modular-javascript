@@ -9,7 +9,7 @@ function displayFeedback(msg){
 	msgDiv.textContent=msg;
 }
 function keyUpHandler(evnt){
-	if(evnt.keyCode==13){
+	if(evnt.code=="Enter"){
 			doCalc();
 	}
 }
