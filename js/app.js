@@ -42,7 +42,7 @@ function init(){
 	msgDiv = document.querySelector("#msg")
 	userNumBox = document.querySelector("#userNum");
 	btn = document.querySelector("#goBtn");
-	btn.addEventListener("click",clickHandler,false);
+	btn.addEventListener("click",doCalc,false);
 }
 
 init();
