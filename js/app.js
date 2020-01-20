@@ -1,18 +1,42 @@
+import {doubleIt} from "./simpleMaths.js";
+import {isValidNum} from "./validationFncs.js";
+
+let userNumBox;
+let btn;
+let msgDiv;
+
+function displayFeedback(msg){
+	msgDiv.textContent=msg;
+}
+function keyUpHandler(evnt){
+	if(evnt.keyCode==13){
+			doCalc();
+	}
+}
+function clickHandler(){
+	doCalc();
+}
+
 function doCalc()
 {
-	var userNum = userNumBox.value.trim();
-	if(userNum=="" || isNaN(userNum))
+	const userNum = userNumBox.value.trim();
+	if(!isValidNum(userNum))
 	{
-        msgDiv.textContent="You need to enter a number";
-        userNumBox.value="";
-        userNumBox.focus();
+      displayFeedback("You need to enter a number");
+      userNumBox.value="";
+      userNumBox.focus();
 	}else{
-		var doubleNum=userNum*2
-        msgDiv.textContent=`Double ${userNum} is ${doubleNum}`;
+			const doubleNum = doubleIt(userNum);
+      displayFeedback(`Double ${userNum} is ${doubleNum}`);
 	}
 }
 
-var userNumBox = document.querySelector("#userNum");
-var btn = document.querySelector("#goBtn");
-var msgDiv=document.querySelector("#msg");
-btn.addEventListener("click",doCalc,false);
+function init(){
+	msgDiv = document.querySelector("#msg")
+	userNumBox = document.querySelector("#userNum");
+	btn = document.querySelector("#goBtn");
+	userNumBox.addEventListener("keyup",keyUpHandler,false);
+	btn.addEventListener("click",clickHandler,false);
+}
+
+init();
