@@ -5,12 +5,12 @@
 At the moment the application is structured as a single huge function. Commented out at the top of the JavaScript file are a number of functions.
 
 1. Try and restructure the code in *doCalc()* so that it calls these functions instead of doing all the work itself.
-* You might find it easier to comment out the existing doCalc function and make a new one and build it up slowly.
-* Make sure that the button click calls *clickHanlder()* and not *doCalc()* directly.
+    * You might find it easier to comment out the existing *doCalc()* function and make a new one and build it up slowly.
+    * Make sure that the button click calls *clickHandler()* and not *doCalc()* directly.
 
 2. One of the advantages of splitting the code into functions is that we have separated out event handling into a separate function (this is the function *clickHandler()*).
-  * Add another function *keyUpHandler()* this should be triggered whenever the use types something into the text box. *keyUpHandler* should also call *doCalc()*.  Check this works.
-  * Modify *keyUpHandler* so that it only calls *doCalc* if the user has hit the enter key. See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code for some advice.  
+    * Add another function *keyUpHandler()* this should be triggered whenever the use types something into the text box. *keyUpHandler* should also call *doCalc()*.  Check this works.
+    * Modify *keyUpHandler* so that it only calls *doCalc* if the user has hit the enter key. See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code for some advice.  
 
 2. Now think about how you can use ES2015 *import* and *export* statements to handle your module loading.
     * This will only work if the files are on a web server.
